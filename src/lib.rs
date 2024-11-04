@@ -396,8 +396,8 @@ impl Default for Criterion {
     /// - No filter
     fn default() -> Criterion {
         let reports = Reports {
-            cli_enabled: true,
-            cli: CliReport::new(false, false, CliVerbosity::Normal),
+            cli_enabled: false,
+            cli: CliReport::new(false, false, CliVerbosity::Quiet),
             bencher_enabled: false,
             bencher: BencherReport,
             html: default_plotting_backend().create_plotter().map(Html::new),
