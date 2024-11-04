@@ -404,10 +404,10 @@ impl CliReport {
     #[allow(clippy::needless_pass_by_value)]
     fn print_overwritable(&self, s: String) {
         if self.enable_text_overwrite {
-            eprint!("{}", s);
+            // eprint!("{}", s);
             stderr().flush().unwrap();
         } else {
-            eprintln!("{}", s);
+            // eprintln!("{}", s);
         }
     }
 
@@ -458,19 +458,19 @@ impl CliReport {
 
         let percent = |n: usize| 100. * n as f64 / sample_size as f64;
 
-        println!(
-            "{}",
-            self.yellow(&format!(
-                "Found {} outliers among {} measurements ({:.2}%)",
-                noutliers,
-                sample_size,
-                percent(noutliers)
-            ))
-        );
+        // println!(
+        //     "{}",
+        //     self.yellow(&format!(
+        //         "Found {} outliers among {} measurements ({:.2}%)",
+        //         noutliers,
+        //         sample_size,
+        //         percent(noutliers)
+        //     ))
+        // );
 
         let print = |n, label| {
             if n != 0 {
-                println!("  {} ({:.2}%) {}", n, percent(n), label);
+                // println!("  {} ({:.2}%) {}", n, percent(n), label);
             }
         };
 
@@ -482,10 +482,10 @@ impl CliReport {
 }
 impl Report for CliReport {
     fn test_start(&self, id: &BenchmarkId, _: &ReportContext) {
-        println!("Testing {}", id);
+        // println!("Testing {}", id);
     }
     fn test_pass(&self, _: &BenchmarkId, _: &ReportContext) {
-        println!("Success");
+        // println!("Success");
     }
 
     fn benchmark_start(&self, id: &BenchmarkId, _: &ReportContext) {
@@ -512,7 +512,7 @@ impl Report for CliReport {
 
     fn terminated(&self, id: &BenchmarkId, _: &ReportContext) {
         self.text_overwrite();
-        println!("Benchmarking {}: Complete (Analysis Disabled)", id);
+        // println!("Benchmarking {}: Complete (Analysis Disabled)", id);
     }
 
     fn analysis(&self, id: &BenchmarkId, _: &ReportContext) {
@@ -632,57 +632,57 @@ impl Report for CliReport {
                 }
 
                 if meas.throughput.is_some() {
-                    println!("{}change:", " ".repeat(17));
+                    // println!("{}change:", " ".repeat(17));
 
-                    println!(
-                        "{}time:   [{} {} {}] (p = {:.2} {} {:.2})",
-                        " ".repeat(24),
-                        self.faint(format::change(
-                            mean_est.confidence_interval.lower_bound,
-                            true
-                        )),
-                        point_estimate_str,
-                        self.faint(format::change(
-                            mean_est.confidence_interval.upper_bound,
-                            true
-                        )),
-                        comp.p_value,
-                        if different_mean { "<" } else { ">" },
-                        comp.significance_threshold
-                    );
-                    println!(
-                        "{}thrpt:  [{} {} {}]",
-                        " ".repeat(24),
-                        self.faint(format::change(
-                            to_thrpt_estimate(mean_est.confidence_interval.upper_bound),
-                            true
-                        )),
-                        thrpt_point_estimate_str,
-                        self.faint(format::change(
-                            to_thrpt_estimate(mean_est.confidence_interval.lower_bound),
-                            true
-                        )),
-                    );
+                    // println!(
+                    //     "{}time:   [{} {} {}] (p = {:.2} {} {:.2})",
+                    //     " ".repeat(24),
+                    //     self.faint(format::change(
+                    //         mean_est.confidence_interval.lower_bound,
+                    //         true
+                    //     )),
+                    //     point_estimate_str,
+                    //     self.faint(format::change(
+                    //         mean_est.confidence_interval.upper_bound,
+                    //         true
+                    //     )),
+                    //     comp.p_value,
+                    //     if different_mean { "<" } else { ">" },
+                    //     comp.significance_threshold
+                    // );
+                    // println!(
+                    //     "{}thrpt:  [{} {} {}]",
+                    //     " ".repeat(24),
+                    //     self.faint(format::change(
+                    //         to_thrpt_estimate(mean_est.confidence_interval.upper_bound),
+                    //         true
+                    //     )),
+                    //     thrpt_point_estimate_str,
+                    //     self.faint(format::change(
+                    //         to_thrpt_estimate(mean_est.confidence_interval.lower_bound),
+                    //         true
+                    //     )),
+                    // );
                 } else {
-                    println!(
-                        "{}change: [{} {} {}] (p = {:.2} {} {:.2})",
-                        " ".repeat(24),
-                        self.faint(format::change(
-                            mean_est.confidence_interval.lower_bound,
-                            true
-                        )),
-                        point_estimate_str,
-                        self.faint(format::change(
-                            mean_est.confidence_interval.upper_bound,
-                            true
-                        )),
-                        comp.p_value,
-                        if different_mean { "<" } else { ">" },
-                        comp.significance_threshold
-                    );
+                    // println!(
+                    //     "{}change: [{} {} {}] (p = {:.2} {} {:.2})",
+                    //     " ".repeat(24),
+                    //     self.faint(format::change(
+                    //         mean_est.confidence_interval.lower_bound,
+                    //         true
+                    //     )),
+                    //     point_estimate_str,
+                    //     self.faint(format::change(
+                    //         mean_est.confidence_interval.upper_bound,
+                    //         true
+                    //     )),
+                    //     comp.p_value,
+                    //     if different_mean { "<" } else { ">" },
+                    //     comp.significance_threshold
+                    // );
                 }
 
-                println!("{}{}", " ".repeat(24), explanation_str);
+                // println!("{}{}", " ".repeat(24), explanation_str);
             }
         }
 
@@ -758,12 +758,12 @@ impl Report for BencherReport {
         ];
         let unit = formatter.scale_for_machines(&mut values);
 
-        println!(
-            "bench: {:>11} {}/iter (+/- {})",
-            format::integer(values[0]),
-            unit,
-            format::integer(values[1])
-        );
+        // println!(
+        //     "bench: {:>11} {}/iter (+/- {})",
+        //     format::integer(values[0]),
+        //     unit,
+        //     format::integer(values[1])
+        // );
     }
 
     fn group_separator(&self) {
