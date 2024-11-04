@@ -555,44 +555,44 @@ impl Report for CliReport {
 
         let typical_estimate = &meas.absolute_estimates.typical();
 
-        {
-            let mut id = id.as_title().to_owned();
+        // {
+        //     let mut id = id.as_title().to_owned();
 
-            if id.len() > 23 {
-                println!("{}", self.green(&id));
-                id.clear();
-            }
-            let id_len = id.len();
+        //     if id.len() > 23 {
+        //         println!("{}", self.green(&id));
+        //         id.clear();
+        //     }
+        //     let id_len = id.len();
 
-            println!(
-                "{}{}time:   [{} {} {}]",
-                self.green(&id),
-                " ".repeat(24 - id_len),
-                self.faint(
-                    formatter.format_value(typical_estimate.confidence_interval.lower_bound)
-                ),
-                self.bold(formatter.format_value(typical_estimate.point_estimate)),
-                self.faint(
-                    formatter.format_value(typical_estimate.confidence_interval.upper_bound)
-                )
-            );
-        }
+        //     println!(
+        //         "{}{}time:   [{} {} {}]",
+        //         self.green(&id),
+        //         " ".repeat(24 - id_len),
+        //         self.faint(
+        //             formatter.format_value(typical_estimate.confidence_interval.lower_bound)
+        //         ),
+        //         self.bold(formatter.format_value(typical_estimate.point_estimate)),
+        //         self.faint(
+        //             formatter.format_value(typical_estimate.confidence_interval.upper_bound)
+        //         )
+        //     );
+        // }
 
-        if let Some(ref throughput) = meas.throughput {
-            println!(
-                "{}thrpt:  [{} {} {}]",
-                " ".repeat(24),
-                self.faint(formatter.format_throughput(
-                    throughput,
-                    typical_estimate.confidence_interval.upper_bound
-                )),
-                self.bold(formatter.format_throughput(throughput, typical_estimate.point_estimate)),
-                self.faint(formatter.format_throughput(
-                    throughput,
-                    typical_estimate.confidence_interval.lower_bound
-                )),
-            );
-        }
+        // if let Some(ref throughput) = meas.throughput {
+        //     println!(
+        //         "{}thrpt:  [{} {} {}]",
+        //         " ".repeat(24),
+        //         self.faint(formatter.format_throughput(
+        //             throughput,
+        //             typical_estimate.confidence_interval.upper_bound
+        //         )),
+        //         self.bold(formatter.format_throughput(throughput, typical_estimate.point_estimate)),
+        //         self.faint(formatter.format_throughput(
+        //             throughput,
+        //             typical_estimate.confidence_interval.lower_bound
+        //         )),
+        //     );
+        // }
 
         if !matches!(self.verbosity, CliVerbosity::Quiet) {
             if let Some(ref comp) = meas.comparison {
